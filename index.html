@@ -482,7 +482,7 @@ footer{
           <h3 class="p-name">Wobbleberry Coloring Pack</h3>
           <p class="p-desc">20 printable coloring pages of Wobble, Berry, Pip, and the meadow. Toddler-thick outlines.</p>
           <div class="p-row">
-            <span class="p-price">$7</span>
+            <span class="p-price">$4.99</span>
             <a class="btn buy-btn" data-product="coloring" href="#" aria-disabled="true">Coming Soon</a>
           </div>
         </div>
@@ -503,7 +503,7 @@ footer{
           <h3 class="p-name">Clap, Stomp, Wobble Activity Book</h3>
           <p class="p-desc">30 pages of mazes, matching, counting berries, and sing-along lyric pages from the songs.</p>
           <div class="p-row">
-            <span class="p-price">$9</span>
+            <span class="p-price">$9.99</span>
             <a class="btn buy-btn" data-product="activity" href="#" aria-disabled="true">Coming Soon</a>
           </div>
         </div>
@@ -522,7 +522,7 @@ footer{
           <h3 class="p-name">Goodnight, Wobbleberry Meadow</h3>
           <p class="p-desc">A gentle illustrated bedtime ebook. Wind down with Wobble as the meadow goes to sleep.</p>
           <div class="p-row">
-            <span class="p-price">$12</span>
+            <span class="p-price">$12.99</span>
             <a class="btn buy-btn" data-product="bedtime" href="#" aria-disabled="true">Coming Soon</a>
           </div>
         </div>
@@ -542,7 +542,7 @@ footer{
           <h3 class="p-name">Wobbleberry Party Printables</h3>
           <p class="p-desc">Banners, cupcake toppers, games, and invites for a full Wobbleberry birthday party.</p>
           <div class="p-row">
-            <span class="p-price">$15</span>
+            <span class="p-price">$19.99</span>
             <a class="btn buy-btn" data-product="party" href="#" aria-disabled="true">Coming Soon</a>
           </div>
         </div>
@@ -564,12 +564,15 @@ footer{
     <h2 class="puffy">Free Wobble Coloring Page!</h2>
     <p class="freebie-sub">Pop in your email and we'll send a free printable coloring page, plus a heads-up when new songs and books drop.</p>
 
-    <!-- ▼▼ EMAIL FORM: create a free form at formspree.io and paste your form ID below ▼▼ -->
-    <form class="freebie-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <form id="freebie-form" class="freebie-form" action="https://formspree.io/f/xgobpejn" method="POST">
       <label for="email" class="sr-only" style="position:absolute;left:-9999px">Email address</label>
       <input type="email" id="email" name="email" placeholder="you@example.com" required>
       <button type="submit" class="btn yellow">Send My Page 🍓</button>
     </form>
+    <div id="freebie-thanks" style="display:none">
+      <p class="freebie-sub" style="margin:0 0 14px">🎉 Yay! Your free coloring page is ready. Tap below to grab it.</p>
+      <a class="btn yellow" href="/Wobbleberry-Coloring-Page.pdf" download>Download Coloring Page 🍓</a>
+    </div>
     <p class="freebie-fine">For grown-ups only. No spam, just wiggles. Unsubscribe anytime.</p>
   </div>
 </section>
@@ -644,6 +647,39 @@ document.querySelectorAll(".buy-btn").forEach(btn => {
     btn.addEventListener("click", e => e.preventDefault());
   }
 });
+
+/* ---- Freebie email capture (Formspree AJAX) ---- */
+const fbForm = document.getElementById("freebie-form");
+if (fbForm) {
+  fbForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const btn = fbForm.querySelector("button[type=submit]");
+    const orig = btn.textContent;
+    btn.textContent = "Sending…";
+    btn.setAttribute("aria-disabled", "true");
+    try {
+      const res = await fetch(fbForm.action, {
+        method: "POST",
+        body: new FormData(fbForm),
+        headers: { "Accept": "application/json" }
+      });
+      if (res.ok) {
+        fbForm.style.display = "none";
+        document.getElementById("freebie-thanks").style.display = "block";
+      } else {
+        const data = await res.json().catch(() => ({}));
+        const msg = (data.errors && data.errors.map(er => er.message).join(", ")) || "Something went wobbly. Please try again.";
+        btn.textContent = orig;
+        btn.removeAttribute("aria-disabled");
+        alert(msg);
+      }
+    } catch (err) {
+      btn.textContent = orig;
+      btn.removeAttribute("aria-disabled");
+      alert("Network hiccup. Please try again in a moment.");
+    }
+  });
+}
 
 function toggleNav(button){
   const links = document.getElementById("navlinks");
