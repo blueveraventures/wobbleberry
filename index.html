@@ -238,6 +238,10 @@ section{padding:84px 20px}
   font-size:.72rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;
   padding:5px 11px;border-radius:999px;border:2.5px solid var(--plum);
 }
+.cover.c-bundle{background:linear-gradient(180deg,#C9B7F1,#8B6DCC)}
+.product.featured{border-color:var(--berry);box-shadow:0 0 0 4px rgba(255,90,95,.18),var(--shadow-soft)}
+.p-was{font-size:.95rem;font-weight:700;color:var(--plum);opacity:.5;text-decoration:line-through;margin-left:7px}
+.p-save{margin:6px 0 0;font-weight:800;font-size:.92rem;color:#3E9B57}
 .shop-soon{
   text-align:center;margin-top:34px;font-weight:700;font-size:1rem;opacity:.75;
 }
@@ -489,6 +493,25 @@ footer{
       </article>
 
       <article class="product">
+        <div class="cover c-bedtime">
+          <svg viewBox="0 0 100 100" aria-hidden="true">
+            <path d="M62 22 A26 26 0 1 0 86 58 A22 22 0 0 1 62 22Z" fill="#FFC947" stroke="#FFF8EC" stroke-width="3"/>
+            <circle cx="30" cy="28" r="2.6" fill="#FFF8EC"/><circle cx="44" cy="18" r="2" fill="#FFF8EC"/>
+            <circle cx="24" cy="48" r="2" fill="#FFF8EC"/><circle cx="38" cy="66" r="2.4" fill="#FFF8EC"/>
+          </svg>
+          <span class="cover-title">Bedtime eBook</span>
+        </div>
+        <div class="p-body">
+          <h3 class="p-name">Goodnight, Wobbleberry Meadow</h3>
+          <p class="p-desc">A gentle illustrated bedtime ebook. Wind down with Wobble as the meadow goes to sleep.</p>
+          <div class="p-row">
+            <span class="p-price">$8.99</span>
+            <a class="btn buy-btn" data-product="bedtime" href="#" aria-disabled="true">Coming Soon</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="product">
         <div class="cover c-activity">
           <svg viewBox="0 0 100 100" aria-hidden="true">
             <rect x="22" y="18" width="56" height="64" rx="8" fill="#FFF8EC" stroke="#4A3B7C" stroke-width="4"/>
@@ -510,25 +533,6 @@ footer{
       </article>
 
       <article class="product">
-        <div class="cover c-bedtime">
-          <svg viewBox="0 0 100 100" aria-hidden="true">
-            <path d="M62 22 A26 26 0 1 0 86 58 A22 22 0 0 1 62 22Z" fill="#FFC947" stroke="#FFF8EC" stroke-width="3"/>
-            <circle cx="30" cy="28" r="2.6" fill="#FFF8EC"/><circle cx="44" cy="18" r="2" fill="#FFF8EC"/>
-            <circle cx="24" cy="48" r="2" fill="#FFF8EC"/><circle cx="38" cy="66" r="2.4" fill="#FFF8EC"/>
-          </svg>
-          <span class="cover-title">Bedtime eBook</span>
-        </div>
-        <div class="p-body">
-          <h3 class="p-name">Goodnight, Wobbleberry Meadow</h3>
-          <p class="p-desc">A gentle illustrated bedtime ebook. Wind down with Wobble as the meadow goes to sleep.</p>
-          <div class="p-row">
-            <span class="p-price">$12.99</span>
-            <a class="btn buy-btn" data-product="bedtime" href="#" aria-disabled="true">Coming Soon</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="product">
         <div class="cover c-party">
           <svg viewBox="0 0 100 100" aria-hidden="true">
             <path d="M30 70 L42 30 L54 70 Z" fill="#FF5A5F" stroke="#4A3B7C" stroke-width="4" stroke-linejoin="round"/>
@@ -545,6 +549,29 @@ footer{
             <span class="p-price">$19.99</span>
             <a class="btn buy-btn" data-product="party" href="#" aria-disabled="true">Coming Soon</a>
           </div>
+        </div>
+      </article>
+
+      <article class="product featured">
+        <div class="cover c-bundle">
+          <span class="p-badge">Best Value</span>
+          <svg viewBox="0 0 100 100" aria-hidden="true">
+            <rect x="22" y="44" width="56" height="38" rx="5" fill="#FFF8EC" stroke="#4A3B7C" stroke-width="4"/>
+            <rect x="18" y="33" width="64" height="15" rx="4" fill="#FFF8EC" stroke="#4A3B7C" stroke-width="4"/>
+            <line x1="50" y1="33" x2="50" y2="82" stroke="#4A3B7C" stroke-width="4"/>
+            <path d="M50 33 Q34 31 34 21 Q34 13 44 17 Q52 21 50 33Z" fill="#FF5A5F" stroke="#4A3B7C" stroke-width="3.5" stroke-linejoin="round"/>
+            <path d="M50 33 Q66 31 66 21 Q66 13 56 17 Q48 21 50 33Z" fill="#FFC947" stroke="#4A3B7C" stroke-width="3.5" stroke-linejoin="round"/>
+          </svg>
+          <span class="cover-title">Everything Pack</span>
+        </div>
+        <div class="p-body">
+          <h3 class="p-name">Wobbleberry Everything Pack</h3>
+          <p class="p-desc">Every Wobbleberry printable in one bundle: the Coloring Pack, Bedtime eBook, Activity Book, and Party Kit.</p>
+          <div class="p-row">
+            <span class="p-price">$34.99 <span class="p-was">$49.99</span></span>
+            <a class="btn buy-btn" data-product="bundle" href="#" aria-disabled="true">Coming Soon</a>
+          </div>
+          <p class="p-save">🎉 Save $15 — that's 30% off!</p>
         </div>
       </article>
     </div>
@@ -632,7 +659,8 @@ const STRIPE_LINKS = {
   coloring: "",
   activity: "",
   bedtime:  "",
-  party:    ""
+  party:    "",
+  bundle:   ""
 };
 
 document.querySelectorAll(".buy-btn").forEach(btn => {
