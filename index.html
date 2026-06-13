@@ -487,12 +487,11 @@ footer{
 
     <div class="shop-grid">
       <!--
-        ============ STRIPE SETUP (when you're ready) ============
-        1. In Stripe Dashboard → Product catalog → Add product (one per item below)
-        2. Create a PAYMENT LINK for each product (no code or backend needed)
-        3. Paste each link into STRIPE_LINKS at the bottom of this file
-        4. Buttons activate automatically — nothing else to change
-        ==========================================================
+        ============ CHECKOUT (Payhip) ============
+        Product checkout links live in PRODUCT_LINKS at the bottom of this file.
+        To swap a product, replace its Payhip link there. A link left as ""
+        keeps that product in "Coming Soon" mode.
+        ===========================================
       -->
       <article class="product">
         <div class="cover c-coloring">
@@ -651,20 +650,19 @@ footer{
 
 <script>
 /* ============================================================
-   STRIPE PAYMENT LINKS: paste your links here when ready.
-   Example: coloring: "https://buy.stripe.com/abc123"
-   Any product left as "" stays in "Coming Soon" mode.
+   PRODUCT CHECKOUT LINKS (Payhip). Any product left as ""
+   stays in "Coming Soon" mode.
    ============================================================ */
-const STRIPE_LINKS = {
-  coloring: "",
-  activity: "",
-  bedtime:  "",
-  party:    "",
-  bundle:   ""
+const PRODUCT_LINKS = {
+  coloring: "https://payhip.com/b/OIqve",
+  activity: "https://payhip.com/b/ScgOD",
+  bedtime:  "https://payhip.com/b/Db4Xp",
+  party:    "https://payhip.com/b/S4ViM",
+  bundle:   "https://payhip.com/b/knBwq"
 };
 
 document.querySelectorAll(".buy-btn").forEach(btn => {
-  const link = STRIPE_LINKS[btn.dataset.product];
+  const link = PRODUCT_LINKS[btn.dataset.product];
   if (link) {
     btn.href = link;
     btn.textContent = "Buy Now";
